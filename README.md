@@ -1,6 +1,8 @@
 # Модуль умной задержки
 
 Объект SmartSleep оборачивает целевую функцию в "умный" декоратор с автоповтором и динамической задержкой между вызовами
+
+## Example
 ```python
 from random import randint
 
@@ -18,3 +20,5 @@ def function_that_cause_random_exception(arg):
 result = function_that_cause_random_exception("test")
 print(result)
 ```
+## Requirements
+`python >= 3.7`
