@@ -20,5 +20,8 @@ def function_that_cause_random_exception(arg):
 result = function_that_cause_random_exception("test")
 print(result)
 ```
+## Install
+- Скопировать `smart_sleep.py` в корень проекта
+- Импортировать в другом файле `from .smart_sleep import SmartSleep`
 ## Requirements
 `python >= 3.7`
