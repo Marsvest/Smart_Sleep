@@ -48,7 +48,7 @@ class SmartSleep:
         """Оборачивает функцию в "умную задержку"
 
         Args:
-            secs (int, optional): Секунд между попытками. Defaults to 60.
+            secs (int, optional): Начальные секунды задержки. Defaults to 60.
             max_tries (int, optional): Максимальное количество попыток. Defaults to 0.
             alert_func (Optional[Callable], optional): Future. Defaults to None.
         """
@@ -81,6 +81,20 @@ class SmartSleep:
         max_tries: int,
         try_i: int,
     ) -> Any:
+        """Вызов итерации задержки
+
+        Args:
+            wrapped_func (Callable[[], Answer]): Обёрнутая функция
+            secs (int): Начальные секунды задержки
+            max_tries (int): Максимальное количество попыток
+            try_i (int): Номер попытки
+
+        Raises:
+            MaxTries: Достигнуто максимальное количество попыток
+
+        Returns:
+            Any: Результат выполнения функции (если успешен)
+        """
         if max_tries > 0 and try_i > max_tries:
             raise MaxTries("Достигнуто максимальное количество попыток")
 
@@ -90,6 +104,9 @@ class SmartSleep:
             return answer.result
         elif answer.exception:
             print(answer.exception)
+
+        if self.alert_func:
+            self.alert_func(...)
 
         sleep_secs: int = secs * try_i
         sleep(sleep_secs)
